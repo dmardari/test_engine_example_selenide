@@ -12,8 +12,8 @@ plugins {
 group = 'com.example.haba'
 version '1.0.0-SNAPSHOT'
 description = 'spring-boot-cucumber'
-sourceCompatibility = 14
-targetCompatibility = 14
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 compileJava { options.encoding = "UTF-8" }
 compileTestJava { options.encoding = "UTF-8" }
@@ -37,9 +37,13 @@ dependencies {
 
     compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: springBootStarter
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootStarter
+    compile group: 'org.yaml', name: 'snakeyaml', version: '1.28' // required to read application.yaml
 
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: selenium
     compile group: 'com.google.guava', name: 'guava', version: '29.0-jre' // selenium requires its presence
+
+    compile group: 'io.qameta.atlas', name: 'atlas-core', version: '1.8.0'
+    compile group: 'io.qameta.atlas', name: 'atlas-webdriver', version: '1.8.0'
 }
 
 test {

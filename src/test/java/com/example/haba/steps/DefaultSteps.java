@@ -1,16 +1,29 @@
 package com.example.haba.steps;
 
+import com.example.haba.Config;
+import com.example.haba.pageobject.MainSite;
 import com.example.haba.selenium.DriverWrapper;
 import io.cucumber.java.en.Given;
+import io.qameta.atlas.core.Atlas;
+import io.qameta.atlas.webdriver.WebDriverConfiguration;
+import org.openqa.selenium.WebDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class DefaultSteps {
+
+    @Autowired
+    Config config;
+
     @Given("empty step")
     public void emptyStep() {
         // nothing should be here
     }
 
-    @Given("page {string} is opened")
-    public void pageWithUrlIsOpened(String url) {
-        DriverWrapper.getDriver().get(url);
+    @Given("main page is opened")
+    public void mainPageIsOpened() {
+        WebDriver driver = DriverWrapper.getDriver();
+        Atlas atlas = new Atlas(new WebDriverConfiguration(driver, config.url));
+        MainSite site = atlas.create(driver, MainSite.class);
+        site.mainPage().open();
     }
 }
