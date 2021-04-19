@@ -3,15 +3,16 @@ package com.example.haba.selenium;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.stereotype.Service;
 
-// TODO 19/04/2021: switch to Spring service
-public class DriverWrapper {
+@Service
+public class WebDriverService {
 
-    private static final Object LOCK = new Object();
+    private final Object LOCK = new Object();
 
-    private static WebDriver driver = null;
+    private WebDriver driver = null;
 
-    public static WebDriver getDriver() {
+    public WebDriver getDriver() {
         synchronized (LOCK) {
             if (driver == null) {
                 // TODO 19/04/2021: hardcoded for now
@@ -25,7 +26,7 @@ public class DriverWrapper {
         return driver;
     }
 
-    public static boolean isOpened() {
+    public boolean isOpened() {
         synchronized (LOCK) {
             return driver != null;
         }
