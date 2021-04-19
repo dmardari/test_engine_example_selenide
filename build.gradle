@@ -27,6 +27,7 @@ repositories {
 ext {
     cucumber = '6.8.0'
     springBootStarter = '2.2.6.RELEASE'
+    selenium = '3.141.5'
 }
 
 dependencies {
@@ -36,6 +37,9 @@ dependencies {
 
     compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: springBootStarter
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootStarter
+
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: selenium
+    compile group: 'com.google.guava', name: 'guava', version: '29.0-jre' // selenium requires its presence
 }
 
 test {
