@@ -25,12 +25,6 @@ public class AtlasSteps {
         site.mainPage().open();
     }
 
-    @Then("main page contains header")
-    public void mainPageContainsHeader() {
-        MainSite site = atlasService.get(MainSite.class);
-        site.mainPage().header().isDisplayed();
-    }
-
     @And("welcome popup is closed")
     public void welcomePopupIsClosed() {
         MainPage mainPage = atlasService.get(MainSite.class).mainPage();

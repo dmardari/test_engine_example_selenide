@@ -5,9 +5,6 @@ import io.qameta.atlas.webdriver.extension.FindBy;
 
 public interface MainPage extends PageTemplate {
 
-    @FindBy("//header")
-    AtlasWebElement header();
-
     @FindBy("//*[@id = 'cssLightbox']")
     AtlasWebElement welcomeToHabaBanner();
 
