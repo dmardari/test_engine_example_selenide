@@ -21,8 +21,14 @@ public class Hooks {
             WebDriver driver = driverService.getDriver();
             try {
                 driver.close();
+            } catch (Exception e) {
+                // TODO 20/04/2021: log a warning
             } finally {
-                driver.quit();
+                try {
+                    driver.quit();
+                } catch (Exception e) {
+                    // TODO 20/04/2021: log a warning
+                }
             }
         }
     }

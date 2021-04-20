@@ -6,3 +6,6 @@ build
 
 # Ignore IDEA files and dirs
 .idea
+
+# Ignore other dirs
+out
