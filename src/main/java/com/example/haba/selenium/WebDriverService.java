@@ -33,23 +33,43 @@ public class WebDriverService {
         return driver;
     }
 
-    public boolean isOpened() {
+    public boolean isClosed() {
         synchronized (LOCK) {
-            return driver != null;
+            return driver == null;
+        }
+    }
+
+    public void closeBrowser() {
+        synchronized (LOCK) {
+            if (driver != null) {
+                try {
+                    driver.close();
+                } catch (Exception e) {
+                    // TODO 20/04/2021: log a warning
+                } finally {
+                    try {
+                        driver.quit();
+                    } catch (Exception e) {
+                        // TODO 20/04/2021: log a warning
+                    } finally {
+                        driver = null;
+                    }
+                }
+            }
         }
     }
 
     private WebDriver instantiateDriver(Browser browser, String... arguments) {
         System.setProperty(browser.driverProperty, "src/main/resources/" + browser.getDriverPath());
-            switch (browser) {
-                case CHROME:
-                    return new ChromeDriver(new ChromeOptions().addArguments(arguments));
-                case FIREFOX:
-                    return new FirefoxDriver(new FirefoxOptions().addArguments(arguments));
-                case SAFARI:
-                    return new SafariDriver(new SafariOptions());
-                default:
-                    throw new RuntimeException(format("Could not create a new instance of driver for %s", browser.name));
+        switch (browser) {
+            case CHROME:
+                return new ChromeDriver(new ChromeOptions().addArguments(arguments));
+            case FIREFOX:
+                return new FirefoxDriver(new FirefoxOptions().addArguments(arguments));
+            case SAFARI:
+                return new SafariDriver(new SafariOptions());
+            default:
+                throw new RuntimeException(format("Could not create a new instance of driver for %s", browser.name));
         }
     }
 }

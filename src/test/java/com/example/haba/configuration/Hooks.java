@@ -17,19 +17,6 @@ public class Hooks {
 
     @After
     public void closeBrowser() {
-        if (driverService.isOpened()) {
-            WebDriver driver = driverService.getDriver();
-            try {
-                driver.close();
-            } catch (Exception e) {
-                // TODO 20/04/2021: log a warning
-            } finally {
-                try {
-                    driver.quit();
-                } catch (Exception e) {
-                    // TODO 20/04/2021: log a warning
-                }
-            }
-        }
+      driverService.closeBrowser();
     }
 }

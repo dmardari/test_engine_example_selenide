@@ -31,7 +31,7 @@ public class AtlasService {
 
     public <T> T get(Class<T> clazz) {
         synchronized (LOCK) {
-            if (atlas == null)
+            if (atlas == null || driverService.isClosed())
                 atlas = instantiateAtlas();
         }
         return clazz.cast(atlas.create(driverService.getDriver(), clazz));
