@@ -1,0 +1,9 @@
+This is a base implementation of e2e test engine. Libs used: Spring Boot, Atlas, Selenium, Cucumber, Hamcrest, Awaitility.
+
+You need Java 1.8 to be installed on your machine (technical limitation of current Atlas verstion).
+
+To run tests on macOS in Chrome just call
+$ ./gradlew test
+
+If you prefer other browser, just call
+$ ./gradlew test -Dbrowser=safari
