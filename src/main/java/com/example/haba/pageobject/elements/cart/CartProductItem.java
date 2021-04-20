@@ -6,4 +6,7 @@ import io.qameta.atlas.webdriver.extension.FindBy;
 public interface CartProductItem extends AtlasWebElement {
     @FindBy(".//*[contains(@class, 'name')]")
     AtlasWebElement name();
+
+    @FindBy(".//*[contains(@class, 'remove-item-btn')]")
+    AtlasWebElement removeButton();
 }

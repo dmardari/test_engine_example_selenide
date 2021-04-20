@@ -63,15 +63,15 @@ public class CartSteps {
 
     @And("cart popup contains selected product")
     public void cartPopupContainsSelectedProduct() {
-        PageTemplate page = atlasService.get(PageTemplate.class);
         String product = scenarioContext.get("product", String.class);
+        PageTemplate page = atlasService.get(PageTemplate.class);
         page.miniCartPopup()
                 .items()
                 .extract(CartPopupItem::name)
                 .should(hasItem(hasProperty("text", equalTo(product))));
     }
 
-    @Then("cart contains {int} product")
+    @Then("cart contains {int} product(s)")
     public void cartContainsProduct(int expectedItemsCount) {
         CartPage page = atlasService.get(CartPage.class);
         page.productItems().should(hasSize(expectedItemsCount));
@@ -79,10 +79,27 @@ public class CartSteps {
 
     @And("cart contains selected product")
     public void cartContainsSelectedProduct() {
-        CartPage page = atlasService.get(CartPage.class);
         String product = scenarioContext.get("product", String.class);
+        CartPage page = atlasService.get(CartPage.class);
         page.productItems()
                 .extract(CartProductItem::name)
                 .should(hasItem(hasProperty("text", equalTo(product))));
+    }
+
+    @When("remove button is pressed for selected product")
+    public void removeButtonIsPressedForSelectedProduct() {
+        String product = scenarioContext.get("product", String.class);
+        CartPage page = atlasService.get(CartPage.class);
+//        page.productItem(product).removeButton().click(); // TODO 20/04/2021: broken library: unable to find removeButton() on page
+        page.productItems()
+                .filter(item -> product.equals(item.name().getText()))
+                .get(0).removeButton().click(); // not recommended according to Atlas docs
+
+    }
+
+    @Then("alert with text {string} appears on the page")
+    public void alertWithTextAppearsOnThePage(String expectedText) {
+        CartPage page = atlasService.get(CartPage.class);
+        page.alertInfo().should(hasProperty("text", containsString(expectedText)));
     }
 }

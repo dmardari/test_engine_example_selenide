@@ -7,17 +7,35 @@ Feature: Cart
     And welcome popup is closed
     And cookies popup is closed
 
+
   Scenario: Cart is always empty by default
     Given cart page is open
     Then cart is empty
+    And cart contains 0 products
+    And cart popup contains 0 products
 
-  Scenario: Any element can be added to cart
+
+  Scenario: Customer can add any available item to cart
     Given random navigation button is pressed
     And random available product tile is pressed
+
     When add to cart button is pressed
     Then cart popup appears
     And cart popup contains 1 product
     And cart popup contains selected product
+
     When cart page is open
     Then cart contains 1 product
     And cart contains selected product
+
+
+  Scenario: Customer can remove item from cart
+    Given random navigation button is pressed
+    And random available product tile is pressed
+    And add to cart button is pressed
+    And cart page is open
+
+    When remove button is pressed for selected product
+    Then alert with text 'Product has been removed from your cart.' appears on the page
+    And cart contains 0 products
+    And cart popup contains 0 products
