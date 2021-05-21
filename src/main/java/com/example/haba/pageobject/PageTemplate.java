@@ -2,10 +2,12 @@ package com.example.haba.pageobject;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import org.springframework.stereotype.Component;
 
 import static com.codeborne.selenide.Selenide.*;
 import static org.openqa.selenium.By.xpath;
 
+@Component
 public class PageTemplate {
     // TODO 20/04/2021: may be rewritten as ElementsCollection
     public SelenideElement cartLink() {
