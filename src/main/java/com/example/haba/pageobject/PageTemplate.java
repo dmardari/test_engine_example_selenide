@@ -1,20 +1,30 @@
 package com.example.haba.pageobject;
 
-import com.example.haba.pageobject.elements.cartpopup.CartPopup;
-import io.qameta.atlas.webdriver.AtlasWebElement;
-import io.qameta.atlas.webdriver.ElementsCollection;
-import io.qameta.atlas.webdriver.WebPage;
-import io.qameta.atlas.webdriver.extension.FindBy;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 
-public interface PageTemplate extends WebPage {
+import static com.codeborne.selenide.Selenide.*;
+import static org.openqa.selenium.By.xpath;
 
+public class PageTemplate {
     // TODO 20/04/2021: may be rewritten as ElementsCollection
-    @FindBy("//*[contains(@class, 'mini-cart-icon')]")
-    AtlasWebElement cartLink();
+    public SelenideElement cartLink() {
+        return $(xpath("//*[contains(@class, 'mini-cart-icon')]"));
+    }
 
-    @FindBy("//div[contains(@class, 'mini-cart-link')]/div[contains(@class, 'mini-popup')]")
-    CartPopup miniCartPopup();
+    public SelenideElement miniCartPopup() {
+        return $(xpath("//div[contains(@class, 'mini-cart-link')]/div[contains(@class, 'mini-popup')]"));
+    }
 
-    @FindBy("//*[contains(@class, 'js-touch-navigation')]")
-    ElementsCollection<AtlasWebElement> navigationButtons();
+    public ElementsCollection miniCartPopupElements() {
+        return miniCartPopup().findAll(xpath(".//li[contains(@class, 'mini-cart-item')]"));
+    }
+
+    public ElementsCollection navigationButtons() {
+        return $$(xpath("//*[contains(@class, 'js-touch-navigation')]"));
+    }
+
+    public SelenideElement welcomeElement() {
+        return $(xpath("//*[@id = 'cssLightbox']"));
+    }
 }

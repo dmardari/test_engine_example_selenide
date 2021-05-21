@@ -1,16 +1,36 @@
 package com.example.haba.pageobject;
 
-import io.qameta.atlas.webdriver.AtlasWebElement;
-import io.qameta.atlas.webdriver.extension.FindBy;
+import com.codeborne.selenide.SelenideElement;
+import com.example.haba.Config;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public interface MainPage extends PageTemplate {
+import static com.codeborne.selenide.Selenide.*;
+import static org.openqa.selenium.By.xpath;
 
-    @FindBy("//*[@id = 'cssLightbox']")
-    AtlasWebElement welcomeToHabaBanner();
+@Component
+public class MainPage extends PageTemplate {
 
-    @FindBy("//*[contains(@class, 'hffLightbox-close')]")
-    AtlasWebElement welcomeToHabaBannerClose();
+    private Config config;
 
-    @FindBy("//button[@id = 'onetrust-accept-btn-handler']")
-    AtlasWebElement acceptAllCookiesButton();
+    @Autowired
+    public MainPage(Config config) {
+        this.config = config;
+    }
+
+    public void visit() {
+        open(config.url);
+    }
+
+    public SelenideElement welcomeToHabaBanner() {
+        return $(xpath("//*[@id = 'cssLightbox']"));
+    }
+
+    public SelenideElement welcomeToHabaBannerClose() {
+        return $(xpath("//*[contains(@class, 'hffLightbox-close')]"));
+    }
+
+    public SelenideElement acceptAllCookiesButton() {
+        return $(xpath("//button[@id = 'onetrust-accept-btn-handler']"));
+    }
 }

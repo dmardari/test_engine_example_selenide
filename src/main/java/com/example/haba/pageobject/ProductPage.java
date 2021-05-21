@@ -1,13 +1,18 @@
 package com.example.haba.pageobject;
 
-import io.qameta.atlas.webdriver.AtlasWebElement;
-import io.qameta.atlas.webdriver.ElementsCollection;
-import io.qameta.atlas.webdriver.extension.FindBy;
+import com.codeborne.selenide.SelenideElement;
+import org.springframework.stereotype.Component;
 
-public interface ProductPage extends PageTemplate{
-    @FindBy("//button[@id = 'addToCartButton']")
-    AtlasWebElement addToCartButton();
+import static com.codeborne.selenide.Selenide.*;
+import static org.openqa.selenium.By.xpath;
 
-    @FindBy("//div[contains(@class, 'product-title')]")
-    AtlasWebElement productTitle();
+@Component
+public class ProductPage extends PageTemplate {
+    public SelenideElement addToCartButton() {
+        return $(xpath("//button[@id = 'addToCartButton']"));
+    }
+
+    public SelenideElement productTitle() {
+        return $(xpath("//div[contains(@class, 'product-title')]"));
+    }
 }

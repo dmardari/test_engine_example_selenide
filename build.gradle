@@ -25,29 +25,24 @@ repositories {
 }
 
 ext {
-    cucumber = '6.8.0'
-    springBootStarter = '2.2.6.RELEASE'
-    selenium = '3.141.5'
+    cucumber = '6.10.3'
+    springBootStarter = '2.4.5'
+    selenium = '3.141.59'
 }
 
 dependencies {
-    compile group: 'io.cucumber', name: 'cucumber-java', version: cucumber
-    compile group: 'io.cucumber', name: 'cucumber-testng', version: cucumber
-    compile group: 'io.cucumber', name: 'cucumber-spring', version: cucumber
+    implementation group: 'io.cucumber', name: 'cucumber-java', version: cucumber
+    implementation group: 'io.cucumber', name: 'cucumber-testng', version: cucumber
+    implementation group: 'io.cucumber', name: 'cucumber-spring', version: cucumber
 
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: springBootStarter
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootStarter
-    compile group: 'org.yaml', name: 'snakeyaml', version: '1.28' // required to read application.yaml
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter', version: springBootStarter
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootStarter
+    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.28' // required to read application.yaml
 
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: selenium
-    compile group: 'com.google.guava', name: 'guava', version: '29.0-jre' // selenium requires its presence
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: selenium
+    implementation group: 'com.google.guava', name: 'guava', version: '29.0-jre' // selenium requires its presence
 
-    compile group: 'io.qameta.atlas', name: 'atlas-core', version: '1.8.0'
-    compile group: 'io.qameta.atlas', name: 'atlas-webdriver', version: '1.8.0'
-
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
-
-    compile group: 'org.awaitility', name: 'awaitility', version: '4.0.3'
+    implementation 'com.codeborne:selenide:5.21.0'
 }
 
 test {
